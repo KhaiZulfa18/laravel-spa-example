@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facedes\Validator;
+// use Illuminate\Support\Facedes\Validator;
+use Validator;
+// use Illuminate\Support\Facades\Validator;
 use App\Post;
 
 class PostController extends Controller
@@ -22,13 +24,14 @@ class PostController extends Controller
         return response()->json($response, 200);
     }
 
-    public function FunctionName(Request $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'content' => 'required'
         ]);
 
+        
         if($validator->fails()){
             return response()->json([
                 'success' => false,
@@ -92,13 +95,13 @@ class PostController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(),[
             'title' => 'required',
             'content' => 'required'
         ]);
-
+        
         if($validator->fails()){
             return response()->json([
                 'success' => false,
